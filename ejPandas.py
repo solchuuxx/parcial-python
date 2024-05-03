@@ -39,15 +39,18 @@ mes_trimestre = {"Enero": 1, "Febrero": 1, "Marzo": 1,
 
 }
 
-
 #Agrupa los datos por trimestre y calcula el total de ventas para cada trimestre.
 df = pd.DataFrame(ventas_mensuales)
+
 df["trimestre"] = df["mes"].map(mes_trimestre)
 trimestral = df.groupby("trimestre")["total_ventas"].sum()
+
 #Filtrar y mostrar solo los meses donde las ventas superen 20000.
 ventas = df[df["total_ventas"] > 20000]
+
 #Encontrar el mes con el mayor volumen de ventas y mostrar esta información.
 mayor_mes_ventas = df["mes"][df["total_ventas"].idxmax()]
+
 #Calcular el promedio de ventas mensuales y mostrar esta información.
 promedio_ventas = df['total_ventas'].mean()
 
@@ -60,8 +63,6 @@ print("\nPromedio ventas mensuales:\n", promedio_ventas)
 print("\nDataFrame con los meses y el total de ventas:\n", df[['mes', 'total_ventas']])
 
 
-
-
-plt.plot(df["mes"], df["total_ventas"])
+plt.plot(df["trimestre"], df["total_ventas"])
 plt.title("Tendencia de ventas")
-#plt.show()
+plt.show()
